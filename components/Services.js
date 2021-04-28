@@ -34,14 +34,7 @@ export default function Services({ service }) {
             //     backgroundPosition:'center'
             // }}
         >
-            {/*<img*/}
-            {/*    className="services-bg"*/}
-            {/*    src={'https:' + bgImage.fields.file.url}*/}
-            {/*    alt="background image"*/}
-            {/*    // layout="fill"*/}
-            {/*    // objectFit='cover'*/}
-            {/*    // objectPosition='center'*/}
-            {/*/>*/}
+
             <div className="services"
             >
                 <div className="services-header">
@@ -51,11 +44,22 @@ export default function Services({ service }) {
                 </div>
                 <div className="services-list">
                     {servicesJson.map(service => (
-                        <div  key={service.title} className="service-item" >
+                        <div  key={service.title} className="service-item">
                             <h3 className="service-title">{service.title}</h3>
                             <p className="service-description">{service.description}</p>
+                            <p className="service-description">{service.description2}</p>
+                            <a className="button" target="_blank"  href={service.description3}>Visit me on LinkedIn</a>
                         </div>
+
                     ))}
+                    <img
+                        className="services-bg"
+                        src={'https:' + bgImage.fields.file.url}
+                        alt="background image"
+                        // layout="fill"
+                        // objectFit='cover'
+                        // objectPosition='center'
+                    />
                 </div>
             </div>
 
@@ -80,7 +84,10 @@ export default function Services({ service }) {
                   //background-size: cover;
                   //background-repeat: no-repeat;
                   //position: relative;
-                  opacity: 0.3;
+                  //opacity: 0.3;
+                  border-radius: 5px;
+                  margin-top: 30px;
+                  //width: 50%;
                }
               .services {
                 max-width: 1280px;
@@ -106,8 +113,21 @@ export default function Services({ service }) {
               }
               
               .service-item {
-                //margin: 120px 0;
+                margin: auto;
+                max-width: 379px;
+                text-align: center;
               }
+              
+              //.service-item linkedin {
+              //    background-color: #4CAF50; /* Green */
+              //    border: none;
+              //    color: white;
+              //    padding: 15px 32px;
+              //    text-align: center;
+              //    text-decoration: none;
+              //    display: inline-block;
+              //    font-size: 16px;
+              //}
               
               .service-title {
                 font-size: 24px;

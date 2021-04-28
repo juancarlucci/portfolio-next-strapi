@@ -1,28 +1,29 @@
 import { createClient } from 'contentful';
-import ProjectCard from '../components/ProjectCard';
-import Services from "../components/Services";
+import ProjectCard from 'components/ProjectCard';
+import Services from "components/Services";
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
+export const getStaticProps = async () => {
+    // get posts from api
+    const { STRAPI_API } = process.env;
+    const res = await fetch(`${STRAPI_API}/portfolios`);
+    const projects = await res.json();
+    const res2 = await fetch(`${STRAPI_API}/highlights`);
+    const services = await res2.json();
+    // console.log("highlights", services);
 
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESS_KEY,
-  });
+    console.log("STRAPI_API", STRAPI_API)
 
-  const resProjects = await client.getEntries({ content_type: "project" });
-  const resServices = await client.getEntries({ content_type: "services" });
-
-  return {
-    props: {
-      projects: resProjects.items,
-      services: resServices.items
-    },
-    revalidate: 1
-  }
+    return {
+        props: {
+            projects,
+            services,
+            strapiURL: STRAPI_API
+        },
+    };
 }
 
-export default function Projects({ projects, services }) {
-
+export default function Projects({ projects, services, strapiURL}) {
 
   return (<>
           <div className="projects-header">
@@ -31,12 +32,12 @@ export default function Projects({ projects, services }) {
               </h2>
           </div>
           <div className="projects-grid">
-          {projects.map(project => (
-              <ProjectCard key={project.sys.id} project={project} />
+          {projects.slice(0).reverse().map(project => (
+              <ProjectCard key={project.id} project={project} strapiURL={strapiURL} />
           ))}
           </div>
           {services.map(service => (
-              <Services key={service.sys.id} service={service} />
+              <Services key={service.id} service={service} />
           ))}
 
           <style jsx>{`

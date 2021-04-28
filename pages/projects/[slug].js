@@ -1,136 +1,141 @@
+import { createClient } from 'contentful'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import Image from 'next/image'
 import Skeleton from '../../components/Skeleton'
 import { motion } from "framer-motion";
 import React from "react";
-import ReactMarkdown from 'react-markdown'
+
+const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_KEY,
+})
 
 //* getStaticPaths tells Next.js how many pages there are. A page per portfolio project.
 export const getStaticPaths = async () => {
-    const { STRAPI_API } = process.env;
-    const res = await fetch(`${STRAPI_API}/portfolios`);
-    const projects = await res.json();
+    const res = await client.getEntries({
+        content_type: "project"
+    })
 
-    const paths = projects.map((project) => ({
-        params: { slug: project.Slug },
-    }));
+    const paths = res.items.map(item => {
+        return {
+            params: { slug: item.fields.slug }
+        }
+    })
 
     //* Static Site Generation builds all files at once. When one file changes, all files are re-built
     //* Setting fallback: false creates Static Site Generation
     //* Incremental Static Generation: when 1st visit, build that page. When 2nd visit, serve static page
     //* Setting fallback: true creates Incremental Static Generation
-  return {
-    paths,
-    fallback: true
-  }
+    return {
+        paths,
+        fallback: true
+    }
 }
 
 //* getStaticProps fetches the data for each individual page
 export const getStaticProps = async ({ params }) => {
+    const { items } = await client.getEntries({
+        content_type: 'project',
+        'fields.slug': params.slug
+    })
 
-    const { slug } = params;
-    const { STRAPI_API } = process.env;
-
-    const res = await fetch(`${STRAPI_API}/portfolios?Slug=${slug}`);
-    const data = await res.json();
-    const project = data[0];
-
-  if (!data.length) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
+    if (!items.length) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        }
     }
-  }
 
-  return {
-    props: { project, STRAPI_API },
-  }
+    return {
+        props: { project: items[0] },
+        revalidate: 1
+    }
 }
 
-export default function ProjectDetails({ project, STRAPI_API }) {
-  if (!project) return <Skeleton />
+export default function ProjectDetails({ project }) {
+    if (!project) return <Skeleton />
 
-  const { FeaturedImage, Title, subTitle, Skills, Details, GitHubLink, imagesAdditional, LiveCodeLink } = project;
-  console.log("imagesAdditional", imagesAdditional)
+    const { featuredImage, title, subTitle, skills, details, gitHubLink, imagesAdditional, liveCodeLink } = project.fields;
 
-  const transitionVariant = {
+    const transitionVariant = {
         pageInitial: {
             opacity: 0,
-                x: '100vw'
+            x: '100vw'
         },
         pageAnimate: {
             opacity: 1,
-                x: 0,
+            x: 0,
             transition:{delay: 0.3, type:'spring', stiffness: 223}
         },
         exit: {
             x: '-100vw',
-                transition: { ease: 'easeInOut'}
+            transition: { ease: 'easeInOut'}
         }
     }
 
-  return (<div key={project.id} className="details-container" >
+    return (<div key={title} className="details-container" >
             <motion.div
-               variants="transitionVariant"
-               initial="pageInitial"
-               animate="pageAnimate"
-               exit="exit">
+                variants="transitionVariant"
+                initial="pageInitial"
+                animate="pageAnimate"
+                exit="exit">
 
-            <div className="details-header">
-                <div className="details-text">
-                    <h2 className="title">{ Title }</h2>
-                    <p className="sub-title">{ subTitle }</p>
-                </div>
+                <div className="details-header">
+                    <div className="details-text">
+                        <h2 className="title">{ title }</h2>
+                        <h4 className="sub-title">{ subTitle }</h4>
+                    </div>
 
-              <img
-                  src={STRAPI_API + FeaturedImage.url}
-                  width={FeaturedImage.width}
-                  height={FeaturedImage.height}
-              />
-
-            </div>
-
-            <div className="content">
-
-              <div className="column-left">
-
-                {imagesAdditional && imagesAdditional.map(img => (
-                  <div className="image-item">
-                    <img
-                        key={img.id}
-                        src={STRAPI_API + img.url}
-                        width={img.width}
-                        height={img.height}
+                    <Image
+                        src={'https:' + featuredImage.fields.file.url}
+                        width={featuredImage.fields.file.details.image.width}
+                        height={featuredImage.fields.file.details.image.height}
                     />
-                  </div>
-              ))}
 
-            </div>
-
-              <div className="column-right">
-                <ReactMarkdown>
-                    {Details}
-                </ReactMarkdown>
-                <div className="skills">
-                  <h3>Skills</h3>
-                    {Skills}
-                </div>
-                <div className="links">
-                  {GitHubLink &&
-                  <a className="code-link button"
-                    href={GitHubLink} target="_blank">Code
-                  </a>}
-                  {LiveCodeLink &&
-
-                  <a className="live-link button"
-                     href={LiveCodeLink} target="_blank"> Live
-                  </a>}
                 </div>
 
+                <div className="content">
 
-              </div>
-            </div>
+                    <div className="column-left">
+
+                        {imagesAdditional && imagesAdditional.map(img => (
+                            <div className="image-item">
+                                <Image
+                                    src={'https:' + img.fields.file.url}
+                                    width={img.fields.file.details.image.width}
+                                    height={img.fields.file.details.image.height}
+                                />
+                            </div>
+                        ))}
+
+                    </div>
+
+                    <div className="column-right">
+
+                        <div>{documentToReactComponents(details)}</div>
+                        <div className="skills">
+                            <h3>Skills</h3>
+                            {skills.map(skill => (
+                                <span key={skill}>{ skill }</span>
+                            ))}
+                        </div>
+                        <div className="links">
+                            {gitHubLink &&
+                            <a className="code-link button"
+                               href={gitHubLink} target="_blank">Code
+                            </a>}
+                            {liveCodeLink &&
+
+                            <a className="live-link button"
+                               href={liveCodeLink} target="_blank"> Live
+                            </a>}
+                        </div>
+
+
+                    </div>
+                </div>
             </motion.div>
             <style jsx>{`
   
@@ -216,6 +221,6 @@ export default function ProjectDetails({ project, STRAPI_API }) {
            `}</style>
 
 
-      </div>
-  )
+        </div>
+    )
 }

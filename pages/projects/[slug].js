@@ -213,10 +213,10 @@ export default function ProjectDetails({ project }) {
                 content: ".";
               }
               
-              .links a:hover {
-                background-color: #888;
-                color: #ffffff;
-              }
+              //.links a:hover {
+              //  background-color: #888;
+              //  color: #ffffff;
+              //}
       
            `}</style>
 

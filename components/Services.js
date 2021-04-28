@@ -69,13 +69,6 @@ export default function Services({ service }) {
               .services-wrapper {
                 max-width: 1280px;
                 margin: 120px auto;
-                //display: grid;
-                //grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
-                //grid-gap: 2rem;
-                //padding-top: 60px;
-                //width: 100%;
-                //position: relative;
-                //top:0;
               }
               .services-bg img{
                   //background-image: url({bgImage.fields.file.url});
@@ -118,16 +111,9 @@ export default function Services({ service }) {
                 text-align: center;
               }
               
-              //.service-item linkedin {
-              //    background-color: #4CAF50; /* Green */
-              //    border: none;
-              //    color: white;
-              //    padding: 15px 32px;
-              //    text-align: center;
-              //    text-decoration: none;
-              //    display: inline-block;
-              //    font-size: 16px;
-              //}
+              .service-description {
+                margin: 47px 0;
+              }
               
               .service-title {
                 font-size: 24px;

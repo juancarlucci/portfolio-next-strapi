@@ -61,6 +61,11 @@ a {
   cursor: pointer;
 }
 
+a:hover {
+  background-color: #888;
+  color: #ffffff;
+}
+
 footer {
   display: block;
   text-align: center;

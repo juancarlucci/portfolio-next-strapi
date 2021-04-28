@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 export default function Layout({ children }) {
     // console.log("children", children)
   return (
-    <div className="layout svg-bg-2">
+    <div className="layout svg-bg-4">
       <Navbar/>
       <div className="container">
         { children }

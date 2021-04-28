@@ -46,7 +46,7 @@ export default function Services({ service }) {
             >
                 <div className="services-header">
                     <h2 className="services-title">
-                        Highlights
+                        About
                     </h2>
                 </div>
                 <div className="services-list">

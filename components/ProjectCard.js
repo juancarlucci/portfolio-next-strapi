@@ -4,7 +4,7 @@ import { motion} from "framer-motion";
 import React from "react";
 
 export default function ProjectCard({ project }) {
-    const { title, slug, thumbnail, skills } = project.fields;
+    const { title, subTitle, slug, thumbnail, skills } = project.fields;
 
     return (
         <motion.div
@@ -43,9 +43,10 @@ export default function ProjectCard({ project }) {
                         <h3 className="content-title">{title}</h3>
                     </div>
                     <div className="content-details details-bottom fadeIn-bottom">
-                        {skills.map(ing => (
-                            <span className="skills-item" key={ing}>{ing}</span>
-                        ))}
+                        {/*{skills.map(ing => (*/}
+                        {/*    <span className="skills-item" key={ing}>{ing}</span>*/}
+                        {/*))}*/}
+                        {subTitle}
                     </div>
 
                 </div>
@@ -62,7 +63,7 @@ export default function ProjectCard({ project }) {
         }
         
         .content .content-overlay {
-          background: rgba(51,51,51,0.8);
+          background: rgba(51,51,51,0.88);
           position: absolute;
           height: 99%;
           width: 100%;

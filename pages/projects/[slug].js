@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Skeleton from '../../components/Skeleton'
 import { motion } from "framer-motion";
 import React from "react";
+import Head from 'next/head'
 
 const client = createClient({
     space: process.env.CONTENTFUL_SPACE_ID,
@@ -76,7 +77,13 @@ export default function ProjectDetails({ project }) {
         }
     }
 
-    return (<div key={title} className="details-container" >
+    return (<>
+            <Head>
+                <title>Juan Carlos Collins | {title}</title>
+                <meta charSet="utf-8" />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
+            <div key={title} className="details-container" >
             <motion.div
                 variants="transitionVariant"
                 initial="pageInitial"
@@ -225,5 +232,6 @@ export default function ProjectDetails({ project }) {
 
 
         </div>
+    </>
     )
 }

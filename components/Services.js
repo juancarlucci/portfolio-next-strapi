@@ -79,7 +79,8 @@ export default function Services({ service }) {
                   //position: relative;
                   //opacity: 0.3;
                   border-radius: 5px;
-                  margin-top: 30px;
+                  //margin-top: 30px;
+                  margin: 30px auto;
                   //width: 50%;
                }
               .services {

@@ -29,11 +29,11 @@ const Navbar = () => {
                     </a>
                 </Link>
             </div>
-            <div className="blank"></div>
+            {/*<div className="blank"></div>*/}
             <div className="nav-links">
                 <Link href="/"><a>Projects</a></Link>
-                <Link href="/about"><a>About</a></Link>
-                <Link href="/contact"><a>Contact</a></Link>
+                {/*<Link href="/about"><a>About</a></Link>*/}
+                {/*<Link href="/contact"><a>Contact</a></Link>*/}
             </div>
         </nav>
             <style jsx>{`
@@ -68,6 +68,7 @@ const Navbar = () => {
                 .logo span {
                   text-transform: uppercase;
                   margin-right: 40px;
+                  display: inline-block;
                 }
       `}</style>
         </div>

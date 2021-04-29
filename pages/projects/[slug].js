@@ -80,6 +80,9 @@ export default function ProjectDetails({ project }) {
     return (<>
             <Head>
                 <title>Juan Carlos Collins | {title}</title>
+                <meta name="description" content="Author: Juan Carlos Collins,
+                    Web Developer and Data Visualizer. Projects include: Inspect Building,
+                    Compliance Assistant, Weather, 3D Renderer, and Butter Map"/>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>

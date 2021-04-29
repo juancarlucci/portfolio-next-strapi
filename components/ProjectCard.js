@@ -11,6 +11,9 @@ export default function ProjectCard({ project }) {
         <>
             <Head>
                 <title>Juan Carlos Collins | Portfolio</title>
+                <meta name="description" content="Juan Carlos Collins,
+                    Web Developer and Data Visualizer. Projects include: Inspect Building,
+                    Compliance Assistant, Weather, 3D Renderer, and Butter Map"/>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>

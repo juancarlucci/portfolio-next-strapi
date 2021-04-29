@@ -44,7 +44,7 @@ export default function Services({ service }) {
                             <h3 className="service-title">{service.title}</h3>
                             <p className="service-description">{service.description}</p>
                             <p className="service-description">{service.description2}</p>
-                            <a className="button" target="_blank"  href={service.description3}>Visit me on LinkedIn</a>
+                            <a className="button" rel="noopener" target="_blank"  href={service.description3}>Visit me on LinkedIn</a>
                         </div>
 
                     ))}

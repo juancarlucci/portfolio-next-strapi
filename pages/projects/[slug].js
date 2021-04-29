@@ -59,6 +59,7 @@ export default function ProjectDetails({ project }) {
 
     const { featuredImage, title, subTitle, skills, details, gitHubLink, imagesAdditional, liveCodeLink } = project.fields;
 
+    console.log("imagesAdditional", imagesAdditional)
     const transitionVariant = {
         pageInitial: {
             opacity: 0,
@@ -92,6 +93,7 @@ export default function ProjectDetails({ project }) {
                         src={'https:' + featuredImage.fields.file.url}
                         width={featuredImage.fields.file.details.image.width}
                         height={featuredImage.fields.file.details.image.height}
+                        alt={featuredImage.fields.title}
                     />
 
                 </div>
@@ -106,6 +108,7 @@ export default function ProjectDetails({ project }) {
                                     src={'https:' + img.fields.file.url}
                                     width={img.fields.file.details.image.width}
                                     height={img.fields.file.details.image.height}
+                                    alt={img.fields.title}
                                 />
                             </div>
                         ))}

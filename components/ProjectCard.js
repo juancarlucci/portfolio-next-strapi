@@ -37,15 +37,13 @@ export default function ProjectCard({ project }) {
                         src={'https:' + thumbnail.fields.file.url}
                         width={thumbnail.fields.file.details.image.width}
                         height={thumbnail.fields.file.details.image.height}
+                        alt={thumbnail.fields.title}
                     />
 
                     <div className="content-details details-top fadeIn-top">
                         <h3 className="content-title">{title}</h3>
                     </div>
                     <div className="content-details details-bottom fadeIn-bottom">
-                        {/*{skills.map(ing => (*/}
-                        {/*    <span className="skills-item" key={ing}>{ing}</span>*/}
-                        {/*))}*/}
                         {subTitle}
                     </div>
 

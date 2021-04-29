@@ -51,7 +51,7 @@ export default function Services({ service }) {
                     <img
                         className="services-bg"
                         src={'https:' + bgImage.fields.file.url}
-                        alt="background image"
+                        alt="jc avatar image"
                     />
                 </div>
             </div>

@@ -1,7 +1,3 @@
-// import Link from 'next/link'
-// import Image from 'next/image'
-// import { motion} from "framer-motion";
-
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import Image from "next/image";
 
@@ -26,7 +22,7 @@ export default function Services({ service }) {
     const bg = bgImage.fields.file.url;
 
     return (
-        <div className="services-wrapper services-bg"
+        <div className="services-wrapper"
             // style={{
             //     backgroundImage: `url(${'https:' + bgImage.fields.file.url})`,
             //     backgroundRepeat: 'no-repeat',
@@ -56,9 +52,6 @@ export default function Services({ service }) {
                         className="services-bg"
                         src={'https:' + bgImage.fields.file.url}
                         alt="background image"
-                        // layout="fill"
-                        // objectFit='cover'
-                        // objectPosition='center'
                     />
                 </div>
             </div>
@@ -70,19 +63,14 @@ export default function Services({ service }) {
                 max-width: 1280px;
                 margin: 120px auto;
               }
+              
               .services-bg img{
-                  //background-image: url({bgImage.fields.file.url});
-                  //background-image: url({{bg}});
-                  //background-position: center;
-                  //background-size: cover;
-                  //background-repeat: no-repeat;
-                  //position: relative;
-                  //opacity: 0.3;
                   border-radius: 5px;
                   //margin-top: 30px;
                   margin: 30px auto;
                   //width: 50%;
                }
+               
               .services {
                 max-width: 1280px;
                 margin: 120px 0;

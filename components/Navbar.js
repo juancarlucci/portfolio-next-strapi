@@ -25,7 +25,7 @@ const Navbar = () => {
                 <Link href="/">
                     <a>
                         <span>Juan Carlos Collins</span>
-                        <span>Web Developer | Data Visualizer</span>
+                        <span className="logo-subtitle">Web Developer | Data Visualizer</span>
                     </a>
                 </Link>
             </div>
@@ -52,13 +52,15 @@ const Navbar = () => {
                   display: flex;
                   justify-content: space-between;
                   font-size: 1rem;
-                  //display: grid;
-                  //grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                  //grid-gap: 2rem;
                 }
                 
                 .logo {
                 display: flex;
+                }
+                
+                .nav-links {
+                  display: flex;
+                  align-items: center;
                 }
                 
                 .nav-links a {
@@ -70,6 +72,28 @@ const Navbar = () => {
                   margin-right: 40px;
                   display: inline-block;
                 }
+                
+                // Responsive
+              //@media only screen and (min-width: 992px) and (max-width: 1199px){
+              //  nav {
+              //    font-size: 20px;
+              //  }
+              //}
+              //@media only screen and (min-width: 768px) and (max-width: 991px){
+              //  nav {
+              //    font-size: 20px;
+              //  }
+              //}
+              @media only screen and (max-width: 767px){
+                nav {
+                  font-size: 14px;
+                }
+              }
+              @media only screen and (max-width: 426px){
+                .logo-subtitle {
+                  font-size: 11px;
+                }
+              }
       `}</style>
         </div>
     )
